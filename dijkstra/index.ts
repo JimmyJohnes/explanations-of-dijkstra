@@ -20,16 +20,17 @@ function findCityWithSmallestCost(currentCity: City){
 	currentCity.neighbours.shift();
 	return nextCity;
 }
+const hasReachedGoal = (currentCity: City) => currentCity.name == 'E';
 function dijkstra(currentCity: City){
 	UpdateCostOfNeighbours(currentCity);
 	currentCity  = findCityWithSmallestCost(currentCity)
-	if(currentCity.name != 'D')
+	if(!hasReachedGoal(currentCity))
 	{
 		return dijkstra(currentCity);
 	}
 	return currentCity
 }
-let S: City | null = Init();
+let S: City | null = Init(2);
 S = dijkstra(S);
 console.log(S.smallestCost);
 while(S.previousCity != null){
