@@ -1,5 +1,29 @@
-import City from "./data_structures/city.ts";
-import Init from "./initialize_graph.ts";
+class City{
+	public name: string;
+	public smallestCost: number;
+	public neighbours: Array<any>;
+	public previousCity: City | null;
+	/**
+	 * City datastructure constructor
+	 * @param {string} name Name of the City
+	 */
+	constructor(name: string){
+		this.name = name;
+		this.smallestCost = Infinity;
+		this.neighbours = [];
+		this.previousCity = null;
+	}
+}
+class Path{
+	public from: City;
+	public to: City;
+	public cost: number;
+	constructor(from: City, to: City, cost: number){
+		this.from = from;
+		this.to = to;
+		this.cost = cost;
+	}
+}
 
 function UpdatePriorityQueue(queue: Array<City>, node: City){
 	let index = queue.indexOf(node);
@@ -25,15 +49,3 @@ function dijkstra(Cities: Array<City>){
 	}
 }
 
-let Cities: Array<City> | null = Init(1);
-dijkstra(Cities)
-
-for(let i of Cities){
-	let path = [];
-	let foo: City | null = i;
-	while(foo != null){
-		path.push(foo.name);
-		foo = foo.previousCity;
-	}
-	console.log(`shortest path from ${Cities[0].name} to ${i.name} is ${path.reverse()} with cost ${i.smallestCost}`);
-}

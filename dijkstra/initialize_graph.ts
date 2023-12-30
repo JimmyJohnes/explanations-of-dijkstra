@@ -7,7 +7,7 @@ function ConnectTwoCities(city1: City, city2:City, pathCost: number){
 /**
  * Test case of a random Graph I made
  */
-function Init1(): City{
+function Init1(): Array<City>{
 	const S = new City('S');
 	let A = new City('A');
 	ConnectTwoCities(S,A,1);
@@ -20,12 +20,12 @@ function Init1(): City{
 	ConnectTwoCities(C,D,1);
 	ConnectTwoCities(B,D,1);
 	S.smallestCost = 0;
-	return S;
+	return [S,A,B,C,D];
 }
 /**
  * Implementation ofThe Graph written in the book
  */
-function Init2(): City{
+function Init2(): Array<City>{
 	let A = new City('A');
 	A.smallestCost = 0;
 	let B = new City('B');
@@ -39,13 +39,13 @@ function Init2(): City{
 	ConnectTwoCities(D,E,4);
 	ConnectTwoCities(D,C,5);
 	ConnectTwoCities(C,E,6);
-	return A;
+	return [A,B,C,D,E]; 
 }
 /**
  * Sets up the initial state of 5 connected cities, returns the Sing city
  * @return {City} S the city where the algorithm starts, with 4 other cities connected
  */
-export default function Init(sceneNumber: number): City{
+export default function Init(sceneNumber: number): Array<City>{
 	if (sceneNumber == 1) return Init1();
 	else return Init2();
 }
